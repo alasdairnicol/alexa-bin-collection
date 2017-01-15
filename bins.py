@@ -7,6 +7,17 @@ RUBBISH = 'rubbish'
 GARDEN = 'garden'
 
 
+WEEKDAYS = {
+    'MONDAY': 1,
+    'TUESDAY': 2,
+    'WEDNESDAY': 3,
+    'THURSDAY': 4,
+    'FRIDAY': 5,
+    'SATURDAY': 6,
+    'SUNDAY': 7,
+}
+
+
 class CollectionDate():
     def __init__(self, collection_date, collection_types):
         self.date = collection_date
@@ -16,14 +27,24 @@ class CollectionDate():
         return "{}: {}".format(self.date, ", ".join(self.types))
 
 EXCEPTIONS = {
+    date(2016, 12, 26): CollectionDate(date(2016, 12, 27), (RUBBISH,)),
+    date(2016, 12, 27): CollectionDate(date(2016, 12, 28), (RUBBISH,)),
+    date(2016, 12, 28): CollectionDate(date(2016, 12, 29), (RUBBISH,)),
+    date(2016, 12, 29): CollectionDate(date(2016, 12, 30), (RUBBISH,)),
     date(2016, 12, 30): CollectionDate(date(2016, 12, 31), (RUBBISH,)),
+    date(2017, 1, 2): CollectionDate(date(2017, 1, 3), (RECYCLING,)),
+    date(2017, 1, 3): CollectionDate(date(2017, 1, 4), (RECYCLING,)),
+    date(2017, 1, 4): CollectionDate(date(2017, 1, 5), (RECYCLING,)),
+    date(2017, 1, 5): CollectionDate(date(2017, 1, 6), (RECYCLING,)),
     date(2017, 1, 6): CollectionDate(date(2017, 1, 7), (RECYCLING,)),
 }
 
 
 def create_collections(regular_collection_day):
     collections = []
-    input_date = date(2016, 11, 4)
+    input_date = date(2016, 10, 30)  # Last Sunday of October 2016
+    input_date += timedelta(WEEKDAYS[regular_collection_day])
+
     collected = (RUBBISH,)
     not_collected = (RECYCLING, GARDEN)
     while input_date < date(2017, 11, 1):
