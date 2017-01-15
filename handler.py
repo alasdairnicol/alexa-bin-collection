@@ -69,7 +69,6 @@ def get_welcome_response(session):
 
     session_attributes = {}
     card_title = "Welcome"
-    collection = get_next_bin_collection()
     user_id = session['user']['userId']
 
     collection_day = get_collection_day(user_id)
@@ -81,6 +80,7 @@ def get_welcome_response(session):
         speech_output = 'I have set your regular collection day as Friday.'
 
     else:
+        collection = get_next_bin_collection(collection_day)
         speech_output = "Your next bin collection is %s on %s. " % (" and ".join(collection.types), collection.date)
 
     # speech_output += "Your user id is %s" % user_id
