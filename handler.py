@@ -120,7 +120,8 @@ def set_user_collection_day(intent, session):
     if 'collection_day' in intent['slots']:
         collection_day = intent['slots']['collection_day']['value'].upper()
         set_collection_day(user_id, collection_day)
-        speech_output = "I have stored your regular collection day as " + collection_day
+        speech_output = "I have stored your regular collection day as %s. You can now ask, when are the bins collected." % collection_day
+        reprompt_text = "To find out your next collection day, just ask, when are the bins collected?"
     else:
         speech_output = "Please tell me your regular bin collection day, for example, My collecton day is Monday"
         reprompt_text = "I'm not sure what your regular bin collection day is. You can tell me by saying, my collection day is Monday"
