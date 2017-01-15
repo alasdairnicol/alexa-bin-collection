@@ -26,6 +26,7 @@ class CollectionDate():
     def __str__(self):
         return "{}: {}".format(self.date, ", ".join(self.types))
 
+
 EXCEPTIONS = {
     date(2016, 12, 26): CollectionDate(date(2016, 12, 27), (RUBBISH,)),
     date(2016, 12, 27): CollectionDate(date(2016, 12, 28), (RUBBISH,)),

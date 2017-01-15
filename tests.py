@@ -33,7 +33,7 @@ def test_no_input_date():
     ["FRIDAY", date(2016, 11, 12), date(2016, 11, 18), (RUBBISH,)],
     ["FRIDAY", date(2017, 1, 13), date(2017, 1, 13), (RUBBISH,)],
     ["FRIDAY", date(2017, 1, 14), date(2017, 1, 20), (RECYCLING, GARDEN)],
-])  
+])
 def test_get_next_bin_collection(regular_collection_day, input_date, collection_date, collection_types):
     collection = get_next_bin_collection(regular_collection_day, input_date)
     assert collection.date == collection_date
@@ -59,7 +59,7 @@ def test_chrismas_2016(regular_collection_day, input_date, collection_date, coll
     collection = get_next_bin_collection(regular_collection_day, input_date)
     assert collection.date == collection_date
     assert collection.types == collection_types
-    
+
 
 def test_no_collection_data():
     assert get_next_bin_collection("FRIDAY", date(2017, 10, 27)) is not None

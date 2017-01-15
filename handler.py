@@ -7,6 +7,7 @@ import boto3
 
 from bins import get_next_bin_collection
 
+
 # --------------- Helpers that build all of the responses ----------------------
 
 def build_speechlet_response(title, output, reprompt_text, should_end_session):
@@ -44,22 +45,36 @@ def get_collection_day(user_id):
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
     table = dynamodb.Table('BinCollectionUsers')
 
-    response = table.get_item(Key={'userid':user_id})
+    response = table.get_item(Key={'userid': user_id})
     if 'Item' in response:
         return response['Item']['collection_day']
     else:
         return None
 
+
 def set_collection_day(user_id, day):
     dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
     table = dynamodb.Table('BinCollectionUsers')
 
-    response = table.put_item(
+    table.put_item(
         Item={
             'userid': user_id,
             'collection_day': 'FRIDAY',
         }
     )
+
+
+def get_collection_day_from_user(session):
+    """
+    Ask the user for their collection day
+    """
+    card_title = "Welcome to the bin collection skill"
+    speech_output = "Welcome to the bin collection skill. Start by telling me your regular collection day. For example, you can say, my collection day is Monday."
+    should_end_session = False
+    reprompt_text = "Please tell me your regular bin collection day, for example, My collecton day is Monday"
+    session_attributes = {}
+    return build_response(session_attributes, build_speechlet_response(
+        card_title, speech_output, reprompt_text, should_end_session))
 
 
 def get_welcome_response(session):
@@ -74,86 +89,44 @@ def get_welcome_response(session):
     collection_day = get_collection_day(user_id)
 
     if collection_day is None:
-        speech_output = "Welcome to the bin collection skill. Start by telling me your regular collection day"
-
-        set_collection_day(user_id, 'FRIDAY')
-        speech_output = 'I have set your regular collection day as Friday.'
-
+        return get_collection_day_from_user(user_id)
     else:
         collection = get_next_bin_collection(collection_day)
         speech_output = "Your next bin collection is %s on %s. " % (" and ".join(collection.types), collection.date)
 
-    # speech_output += "Your user id is %s" % user_id
-    # If the user either does not reply to the welcome message or says something
-    # that is not understood, they will be prompted again with this text.
-    reprompt_text = "Please tell me your favorite color by saying, " \
-                    "my favorite color is red."
-    should_end_session = True
-    return build_response(session_attributes, build_speechlet_response(
-        card_title, speech_output, reprompt_text, should_end_session))
+        should_end_session = True
+        reprompt_text = None
+        return build_response(session_attributes, build_speechlet_response(
+            card_title, speech_output, reprompt_text, should_end_session))
 
 
 def handle_session_end_request():
     card_title = "Session Ended"
-    speech_output = "Thank you for trying the Alexa Skills Kit sample. " \
-                    "Have a nice day! "
+    speech_output = "Thank you for using the bin collection skill."
     # Setting this to true ends the session and exits the skill.
     should_end_session = True
     return build_response({}, build_speechlet_response(
         card_title, speech_output, None, should_end_session))
 
 
-def create_favorite_color_attributes(favorite_color):
-    return {"favoriteColor": favorite_color}
-
-def set_color_in_session(intent, session):
-    """ Sets the color in the session and prepares the speech to reply to the
-    user.
-    """
-
-    card_title = intent['name']
+def set_user_collection_day(intent, session):
+    """Sets the collection day for the user"""
+    card_title = "What is your regular collection day"
     session_attributes = {}
     should_end_session = False
 
-    if 'Color' in intent['slots']:
-        favorite_color = intent['slots']['Color']['value']
-        session_attributes = create_favorite_color_attributes(favorite_color)
-        speech_output = "I now know your favorite color is " + \
-                        favorite_color + \
-                        ". You can ask me your favorite color by saying, " \
-                        "what's my favorite color?"
-        reprompt_text = "You can ask me your favorite color by saying, " \
-                        "what's my favorite color?"
+    user_id = session['user']['userId']
+
+    if 'collection_day' in intent['slots']:
+        collection_day = intent['slots']['collection_day']['value'].upper()
+        set_collection_day(user_id, collection_day)
+        speech_output = "I have stored your regular collection day as " + collection_day
     else:
-        speech_output = "I'm not sure what your favorite color is. " \
-                        "Please try again."
-        reprompt_text = "I'm not sure what your favorite color is. " \
-                        "You can tell me your favorite color by saying, " \
-                        "my favorite color is red."
+        speech_output = "Please tell me your regular bin collection day, for example, My collecton day is Monday"
+        reprompt_text = "I'm not sure what your regular bin collection day is. You can tell me by saying, my collection day is Monday"
+
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
-
-
-def get_color_from_session(intent, session):
-    session_attributes = {}
-    reprompt_text = None
-
-    if session.get('attributes', {}) and "favoriteColor" in session.get('attributes', {}):
-        favorite_color = session['attributes']['favoriteColor']
-        speech_output = "Your favorite color is " + favorite_color + \
-                        ". Goodbye."
-        should_end_session = True
-    else:
-        speech_output = "I'm not sure what your favorite color is. " \
-                        "You can say, my favorite color is red."
-        should_end_session = False
-
-    # Setting reprompt_text to None signifies that we do not want to reprompt
-    # the user. If the user does not respond or says something that is not
-    # understood, the session will end.
-    return build_response(session_attributes, build_speechlet_response(
-        intent['name'], speech_output, reprompt_text, should_end_session))
-
 
 
 # --------------- Events ------------------
@@ -169,8 +142,6 @@ def on_launch(launch_request, session):
     """ Called when the user launches the skill without specifying what they
     want
     """
-    user_id = session['user']['userId']
-
     print("on_launch requestId=" + launch_request['requestId'] +
           ", sessionId=" + session['sessionId'])
     # Dispatch to your skill's launch
@@ -185,16 +156,14 @@ def on_intent(intent_request, session):
 
     intent = intent_request['intent']
     intent_name = intent_request['intent']['name']
-    return get_welcome_response(session)
-
 
     # Dispatch to your skill's intent handlers
-    if intent_name == "MyColorIsIntent":
-        return set_color_in_session(intent, session)
-    elif intent_name == "WhatsMyColorIntent":
-        return get_color_from_session(intent, session)
+    if intent_name == "NextCollectionDayIntent":
+        return get_welcome_response(session)
+    elif intent_name == "MyCollectionDayIntent":
+        return set_user_collection_day(intent, session)
     elif intent_name == "AMAZON.HelpIntent":
-        return get_welcome_response()
+        return get_welcome_response(session)
     elif intent_name == "AMAZON.CancelIntent" or intent_name == "AMAZON.StopIntent":
         return handle_session_end_request()
     else:
