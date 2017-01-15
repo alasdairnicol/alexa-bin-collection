@@ -12,7 +12,10 @@ provider:
         - "dynamodb:GetItem"
         - "dynamodb:PutItem"
       Resource:
-        - "arn:aws:dynamodb:eu-west-1:*"
+         Fn::Join:
+           - ""
+           - - arn:aws:dynamodb:${self:provider.region}:*:table/
+             - Ref: usersTable
 
 functions:
   skill:
