@@ -21,7 +21,7 @@ EXCEPTIONS = {
 }
 
 
-def create_collections():
+def create_collections(regular_collection_day):
     collections = []
     input_date = date(2016, 11, 4)
     collected = (RUBBISH,)
@@ -38,10 +38,10 @@ def create_collections():
     return collections
 
 
-def get_next_bin_collection(input_date=None):
+def get_next_bin_collection(regular_collection_day, input_date=None):
     if input_date is None:
         input_date = date.today()
-    collections = create_collections()
+    collections = create_collections(regular_collection_day)
 
     for collection in collections:
         if collection.date >= input_date:
