@@ -1,8 +1,9 @@
 """
 This skill allows you to ask Alexa when the next bin collection is.
 """
-
 from __future__ import print_function
+
+import boto3
 
 from bins import get_next_bin_collection
 
@@ -39,6 +40,28 @@ def build_response(session_attributes, speechlet_response):
 
 # --------------- Functions that control the skill's behavior ------------------
 
+def get_collection_day(user_id):
+    dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
+    table = dynamodb.Table('BinCollectionUsers')
+
+    response = table.get_item(Key={'userid':user_id})
+    if 'Item' in response:
+        return response['Item']['collection_day']
+    else:
+        return None
+
+def set_collection_day(user_id, day):
+    dynamodb = boto3.resource('dynamodb', region_name='eu-west-1')
+    table = dynamodb.Table('BinCollectionUsers')
+
+    response = table.put_item(
+        Item={
+            'userid': user_id,
+            'collection_day': 'FRIDAY',
+        }
+    )
+
+
 def get_welcome_response(session):
     """ If we wanted to initialize the session to have some attributes we could
     add those here
@@ -49,7 +72,17 @@ def get_welcome_response(session):
     collection = get_next_bin_collection()
     user_id = session['user']['userId']
 
-    speech_output = "Your next bin collection is %s on %s. " % (" and ".join(collection.types), collection.date)
+    collection_day = get_collection_day(user_id)
+
+    if collection_day is None:
+        speech_output = "Welcome to the bin collection skill. Start by telling me your regular collection day"
+
+        set_collection_day(user_id, 'FRIDAY')
+        speech_output = 'I have set your regular collection day as Friday.'
+
+    else:
+        speech_output = "Your next bin collection is %s on %s. " % (" and ".join(collection.types), collection.date)
+
     # speech_output += "Your user id is %s" % user_id
     # If the user either does not reply to the welcome message or says something
     # that is not understood, they will be prompted again with this text.
