@@ -70,3 +70,14 @@ def test_no_collection_data():
 
     assert get_next_bin_collection("TUESDAY", date(2017, 10, 31)) is not None
     assert get_next_bin_collection("TUESDAY", date(2017, 11, 1)) is None
+
+def test_friendly_date():
+    with freeze_time("2017-1-15"):
+        collection = CollectionDate(date(2017,1,15), [])
+        assert collection.friendly_date == "today"
+
+        collection = CollectionDate(date(2017,1,16), [])
+        assert collection.friendly_date == "tomorrow"
+
+        collection = CollectionDate(date(2017,1,17), [])
+        assert collection.friendly_date == "on Tuesday the 17th of January"

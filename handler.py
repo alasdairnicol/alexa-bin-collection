@@ -92,7 +92,7 @@ def get_welcome_response(session):
         return get_collection_day_from_user(user_id)
     else:
         collection = get_next_bin_collection(collection_day)
-        speech_output = "Your next bin collection is %s on %s. " % (" and ".join(collection.types), collection.date)
+        speech_output = "Your next bin collection is %s %s. " % (" and ".join(collection.types), collection.friendly_date)
 
         should_end_session = True
         reprompt_text = None

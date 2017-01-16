@@ -23,6 +23,22 @@ class CollectionDate():
         self.date = collection_date
         self.types = collection_types
 
+    @staticmethod
+    def _suffix(d):
+        return 'th' if 11<=d<=13 else {1:'st',2:'nd',3:'rd'}.get(d%10, 'th')
+
+    @property
+    def friendly_date(self):
+        if self.date == date.today():
+            return "today"
+        elif (self.date - date.today()).days == 1:
+            return "tomorrow"
+        else:
+            weekday = self.date.strftime('%A')
+            day = "%s%s" % (self.date.day, self._suffix(self.date.day))
+            month = self.date.strftime('%B')
+            return "on %s the %s of %s" % (weekday, day, month)
+
     def __str__(self):
         return "{}: {}".format(self.date, ", ".join(self.types))
 
