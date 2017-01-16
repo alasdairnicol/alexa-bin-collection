@@ -16,11 +16,11 @@ def build_speechlet_response(title, output, reprompt_text, should_end_session):
             'type': 'PlainText',
             'text': output
         },
-        'card': {
-            'type': 'Simple',
-            'title': "SessionSpeechlet - " + title,
-            'content': "SessionSpeechlet - " + output
-        },
+        # 'card': {
+        #    'type': 'Simple',
+        #    'title': "SessionSpeechlet - " + title,
+        #    'content': "SessionSpeechlet - " + output
+        # },
         'reprompt': {
             'outputSpeech': {
                 'type': 'PlainText',
