@@ -3,7 +3,7 @@ service: bincollection
 provider:
   name: aws
   runtime: python2.7
-  stage: dev
+  stage: prod
   region: eu-west-1
   events: alexaSkill
   iamRoleStatements:
