@@ -116,14 +116,17 @@ def set_user_collection_day(intent, session):
     should_end_session = False
 
     user_id = session['user']['userId']
+    collection_day = intent['slots']['collection_day'].get('value', '').upper()
 
-    if 'collection_day' in intent['slots']:
-        collection_day = intent['slots']['collection_day']['value'].upper()
+    if collection_day in ('MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY'):
         set_collection_day(user_id, collection_day)
         speech_output = "I have stored your regular collection day as %s. You can now ask, when are the bins collected." % collection_day
         reprompt_text = "To find out your next collection day, just ask, when are the bins collected?"
+    elif collection_day in ('SATURDAY', 'SUNDAY'):
+        speech_output = "Your collection day must be Monday to Friday. Please tell me your regular collection day, for example, My collection day is Monday"
+        reprompt_text = "I'm not sure what your regular bin collection day is. You can tell me by saying, my collection day is Monday"
     else:
-        speech_output = "Please tell me your regular bin collection day, for example, My collecton day is Monday"
+        speech_output = "Sorry, I didn't catch that. Please tell me your regular collection day, for example, My collection day is Monday"
         reprompt_text = "I'm not sure what your regular bin collection day is. You can tell me by saying, my collection day is Monday"
 
     return build_response(session_attributes, build_speechlet_response(
