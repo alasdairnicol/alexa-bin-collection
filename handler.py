@@ -71,7 +71,7 @@ def get_collection_day_from_user(session):
     card_title = "Welcome to the bin collection skill"
     speech_output = "Welcome to the bin collection skill. Start by telling me your regular collection day. For example, you can say, my collection day is Monday."
     should_end_session = False
-    reprompt_text = "Please tell me your regular bin collection day, for example, My collecton day is Monday"
+    reprompt_text = "Please tell me your regular bin collection day, for example, My collection day is Monday"
     session_attributes = {}
     return build_response(session_attributes, build_speechlet_response(
         card_title, speech_output, reprompt_text, should_end_session))
