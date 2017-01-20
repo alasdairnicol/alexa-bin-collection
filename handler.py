@@ -59,7 +59,7 @@ def set_collection_day(user_id, day):
     table.put_item(
         Item={
             'userid': user_id,
-            'collection_day': 'FRIDAY',
+            'collection_day': day,
         }
     )
 
