@@ -1,0 +1,25 @@
+{
+  "intents": [
+    {
+      "intent": "NextCollectionDayIntent"
+    },
+    {
+      "intent": "MyCollectionDayIntent",
+      "slots": [
+        {
+          "name": "collection_day",
+          "type": "LIST_OF_DAYS"
+        }
+      ]
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+        {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}

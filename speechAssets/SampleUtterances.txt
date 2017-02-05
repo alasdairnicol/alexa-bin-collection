@@ -1,0 +1,4 @@
+NextCollectionDayIntent when are the bins collected
+NextCollectionDayIntent which day are the bins collected
+MyCollectionDayIntent my collection day is {collection_day}
+MyCollectionDayIntent my bins are collected on {collection_day}
