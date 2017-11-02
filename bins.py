@@ -64,7 +64,7 @@ def create_collections(regular_collection_day):
 
     collected = (RUBBISH,)
     not_collected = (RECYCLING, GARDEN)
-    while input_date < date(2017, 11, 1):
+    while input_date < date(2017, 12, 1):
         if input_date in EXCEPTIONS:
             collection = EXCEPTIONS[input_date]
         else:
