@@ -77,7 +77,7 @@ EXCEPTIONS = {
 
 def create_collections(regular_collection_day):
     collections = []
-    input_date = date(2016, 10, 30)  # Last Sunday of October 2016
+    input_date = date(2017, 10, 29)  # Last Sunday of October 2017
     input_date += timedelta(WEEKDAYS[regular_collection_day])
 
     collected = (RUBBISH,)
