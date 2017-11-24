@@ -54,6 +54,24 @@ EXCEPTIONS = {
     date(2017, 1, 4): CollectionDate(date(2017, 1, 5), (RECYCLING,)),
     date(2017, 1, 5): CollectionDate(date(2017, 1, 6), (RECYCLING,)),
     date(2017, 1, 6): CollectionDate(date(2017, 1, 7), (RECYCLING,)),
+
+    date(2017, 12, 25): CollectionDate(date(2017, 12, 27), (RUBBISH,)),
+    date(2017, 12, 26): CollectionDate(date(2017, 12, 28), (RUBBISH,)),
+    date(2017, 12, 27): CollectionDate(date(2017, 12, 29), (RUBBISH,)),
+    date(2017, 12, 28): CollectionDate(date(2017, 12, 30), (RUBBISH,)),
+    date(2017, 12, 29): CollectionDate(date(2018, 1, 2), (RUBBISH,)),
+
+    date(2018, 1, 1): CollectionDate(date(2018, 1, 3), (RECYCLING,)),
+    date(2018, 1, 2): CollectionDate(date(2018, 1, 4), (RECYCLING,)),
+    date(2018, 1, 3): CollectionDate(date(2018, 1, 5), (RECYCLING,)),
+    date(2018, 1, 4): CollectionDate(date(2018, 1, 6), (RECYCLING,)),
+    date(2018, 1, 5): CollectionDate(date(2018, 1, 8), (RECYCLING,)),
+
+    date(2018, 1, 8): CollectionDate(date(2018, 1, 9), (RUBBISH,)),
+    date(2018, 1, 9): CollectionDate(date(2018, 1, 10), (RUBBISH,)),
+    date(2018, 1, 10): CollectionDate(date(2018, 1, 11), (RUBBISH,)),
+    date(2018, 1, 11): CollectionDate(date(2018, 1, 12), (RUBBISH,)),
+    date(2018, 1, 12): CollectionDate(date(2018, 1, 13), (RUBBISH,)),
 }
 
 
