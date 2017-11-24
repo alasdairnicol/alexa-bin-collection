@@ -11,9 +11,9 @@ def test_no_input_date():
     collection = get_next_bin_collection("FRIDAY")
     assert isinstance(collection, CollectionDate)
 
-    with freeze_time("2017-1-15"):
+    with freeze_time("2018-1-15"):
         collection = get_next_bin_collection("FRIDAY")
-        assert collection.date == date(2017, 1, 20)
+        assert collection.date == date(2018, 1, 19)
         assert collection.types == (RECYCLING, GARDEN)
 
 
