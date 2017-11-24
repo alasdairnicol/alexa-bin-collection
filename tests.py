@@ -33,6 +33,19 @@ def test_default_input_date():
     ["FRIDAY", date(2017, 11, 11), date(2017, 11, 17), (RUBBISH,)],
     ["FRIDAY", date(2018, 1, 19), date(2018, 1, 19), (RECYCLING, GARDEN,)],
     ["FRIDAY", date(2018, 1, 20), date(2018, 1, 26), (RUBBISH,)],
+
+    # Predicted dates for November 2018
+    ["MONDAY", date(2018, 11, 1), date(2018, 11, 5), (RECYCLING, GARDEN)],
+    ["MONDAY", date(2018, 11, 5), date(2018, 11, 5), (RECYCLING, GARDEN)],
+    ["MONDAY", date(2018, 11, 6), date(2018, 11, 12), (RUBBISH,)],
+    ["MONDAY", date(2018, 11, 12), date(2018, 11, 12), (RUBBISH,)],
+    ["MONDAY", date(2018, 11, 13), date(2018, 11, 19), (RECYCLING, GARDEN)],
+
+    ["FRIDAY", date(2018, 11, 1), date(2018, 11, 2), (RUBBISH,)],
+    ["FRIDAY", date(2018, 11, 2), date(2018, 11, 2), (RUBBISH,)],
+    ["FRIDAY", date(2018, 11, 3), date(2018, 11, 9), (RECYCLING, GARDEN)],
+    ["FRIDAY", date(2018, 11, 9), date(2018, 11, 9), (RECYCLING, GARDEN)],
+    ["FRIDAY", date(2018, 11, 10), date(2018, 11, 16), (RUBBISH,)],
 ])
 def test_get_next_bin_collection(regular_collection_day, input_date, collection_date, collection_types):
     collection = get_next_bin_collection(regular_collection_day, input_date)
