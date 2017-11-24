@@ -7,7 +7,7 @@ from freezegun import freeze_time
 from bins import get_next_bin_collection, CollectionDate, RECYCLING, RUBBISH, GARDEN
 
 
-def test_no_input_date():
+def test_default_input_date():
     collection = get_next_bin_collection("FRIDAY")
     assert isinstance(collection, CollectionDate)
 
