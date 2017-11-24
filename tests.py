@@ -120,16 +120,15 @@ def test_christmas_2017(regular_collection_day, input_date, collection_date, col
     assert collection.types == collection_types
 
 
-@pytest.mark.skip("Skipping while we add new dates")
 def test_no_collection_data():
-    assert get_next_bin_collection("FRIDAY", date(2017, 10, 27)) is not None
-    assert get_next_bin_collection("FRIDAY", date(2017, 10, 28)) is None
+    assert get_next_bin_collection("FRIDAY", date(2018, 10, 26)) is not None
+    assert get_next_bin_collection("FRIDAY", date(2018, 10, 27)) is None
 
-    assert get_next_bin_collection("MONDAY", date(2017, 10, 30)) is not None
-    assert get_next_bin_collection("MONDAY", date(2017, 10, 31)) is None
+    assert get_next_bin_collection("MONDAY", date(2018, 10, 29)) is not None
+    assert get_next_bin_collection("MONDAY", date(2018, 10, 30)) is None
 
-    assert get_next_bin_collection("TUESDAY", date(2017, 10, 31)) is not None
-    assert get_next_bin_collection("TUESDAY", date(2017, 11, 1)) is None
+    assert get_next_bin_collection("WEDNESDAY", date(2018, 10, 31)) is not None
+    assert get_next_bin_collection("WEDNESDAY", date(2018, 11, 1)) is None
 
 def test_friendly_date():
     with freeze_time("2017-1-15"):
