@@ -72,6 +72,25 @@ EXCEPTIONS = {
     date(2018, 1, 10): CollectionDate(date(2018, 1, 11), (RUBBISH,)),
     date(2018, 1, 11): CollectionDate(date(2018, 1, 12), (RUBBISH,)),
     date(2018, 1, 12): CollectionDate(date(2018, 1, 13), (RUBBISH,)),
+
+    # date(2018, 12, 24): CollectionDate(date(2017, 12, 24), (RUBBISH,)),  # Regular day
+    date(2018, 12, 25): CollectionDate(date(2018, 12, 27), (RUBBISH,)),
+    date(2018, 12, 26): CollectionDate(date(2018, 12, 28), (RUBBISH,)),
+    date(2018, 12, 27): CollectionDate(date(2018, 12, 29), (RUBBISH,)),
+    date(2018, 12, 28): CollectionDate(date(2018, 12, 31), (RUBBISH,)),
+
+    date(2018, 12, 31): CollectionDate(date(2019, 1, 2), (RECYCLING, GARDEN)),
+    date(2019, 1, 1): CollectionDate(date(2019, 1, 3), (RECYCLING, GARDEN)),
+    date(2019, 1, 2): CollectionDate(date(2019, 1, 4), (RECYCLING, GARDEN)),
+    date(2019, 1, 3): CollectionDate(date(2019, 1, 5), (RECYCLING, GARDEN)),
+    date(2019, 1, 4): CollectionDate(date(2019, 1, 7), (RECYCLING, GARDEN)),
+
+    date(2019, 1, 7): CollectionDate(date(2019, 1, 8), (RUBBISH,)),
+    date(2019, 1, 8): CollectionDate(date(2019, 1, 9), (RUBBISH,)),
+    date(2019, 1, 9): CollectionDate(date(2019, 1, 10), (RUBBISH,)),
+    date(2019, 1, 10): CollectionDate(date(2019, 1, 11), (RUBBISH,)),
+    date(2019, 1, 11): CollectionDate(date(2019, 1, 12), (RUBBISH,)),
+
 }
 
 
@@ -82,7 +101,7 @@ def create_collections(regular_collection_day):
 
     collected = (RUBBISH,)
     not_collected = (RECYCLING, GARDEN)
-    while input_date < date(2018, 12, 1):
+    while input_date < date(2019, 12, 1):
         if input_date in EXCEPTIONS:
             collection = EXCEPTIONS[input_date]
         else:
