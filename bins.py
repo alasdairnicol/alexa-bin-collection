@@ -87,6 +87,10 @@ def create_collections(regular_collection_day):
 def get_next_bin_collection(regular_collection_day, input_date=None):
     if input_date is None:
         input_date = date.today()
+
+    if input_date <= date(2018, 10, 31):
+        return None
+
     collections = create_collections(regular_collection_day)
 
     for collection in collections:

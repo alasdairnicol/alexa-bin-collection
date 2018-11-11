@@ -155,6 +155,14 @@ def test_no_collection_data():
     assert get_next_bin_collection("FRIDAY", date(2019, 11, 30)) is None
 
 
+def test_no_collection_data_too_early():
+    assert get_next_bin_collection("MONDAY", date(2018, 10, 31)) is None
+    assert get_next_bin_collection("MONDAY", date(2018, 11, 1)) is not None
+
+    assert get_next_bin_collection("FRIDAY", date(2018, 10, 31)) is None
+    assert get_next_bin_collection("FRIDAY", date(2018, 11, 1)) is not None
+
+
 def test_friendly_date():
     with freeze_time("2017-1-15"):
         collection = CollectionDate(date(2017,1,15), [])
