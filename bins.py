@@ -2,30 +2,30 @@
 from __future__ import print_function
 from datetime import date, timedelta
 
-RECYCLING = 'recycling'
-RUBBISH = 'rubbish'
-GARDEN = 'garden'
+RECYCLING = "recycling"
+RUBBISH = "rubbish"
+GARDEN = "garden"
 
 
 WEEKDAYS = {
-    'MONDAY': 1,
-    'TUESDAY': 2,
-    'WEDNESDAY': 3,
-    'THURSDAY': 4,
-    'FRIDAY': 5,
-    'SATURDAY': 6,
-    'SUNDAY': 7,
+    "MONDAY": 1,
+    "TUESDAY": 2,
+    "WEDNESDAY": 3,
+    "THURSDAY": 4,
+    "FRIDAY": 5,
+    "SATURDAY": 6,
+    "SUNDAY": 7,
 }
 
 
-class CollectionDate():
+class CollectionDate:
     def __init__(self, collection_date, collection_types):
         self.date = collection_date
         self.types = collection_types
 
     @staticmethod
     def _suffix(d):
-        return 'th' if 11<=d<=13 else {1:'st',2:'nd',3:'rd'}.get(d%10, 'th')
+        return "th" if 11 <= d <= 13 else {1: "st", 2: "nd", 3: "rd"}.get(d % 10, "th")
 
     @property
     def friendly_date(self):
@@ -34,9 +34,9 @@ class CollectionDate():
         elif (self.date - date.today()).days == 1:
             return "tomorrow"
         else:
-            weekday = self.date.strftime('%A')
+            weekday = self.date.strftime("%A")
             day = "%s%s" % (self.date.day, self._suffix(self.date.day))
-            month = self.date.strftime('%B')
+            month = self.date.strftime("%B")
             return "on %s the %s of %s" % (weekday, day, month)
 
     def __str__(self):
@@ -49,13 +49,11 @@ EXCEPTIONS = {
     # date(2020, 12, 23): CollectionDate(date(2020, 12, 23), (RUBBISH,)),  # Regular day
     # date(2020, 12, 24): CollectionDate(date(2020, 12, 24), (RUBBISH,)),  # Regular day
     date(2020, 12, 25): CollectionDate(date(2020, 12, 28), (RUBBISH,)),
-
     date(2020, 12, 28): CollectionDate(date(2020, 12, 29), (RECYCLING,)),
     date(2020, 12, 29): CollectionDate(date(2020, 12, 30), (RECYCLING,)),
     date(2020, 12, 30): CollectionDate(date(2020, 12, 31), (RECYCLING,)),
     date(2020, 12, 31): CollectionDate(date(2021, 1, 2), (RECYCLING,)),
     date(2021, 1, 1): CollectionDate(date(2021, 1, 4), (RECYCLING,)),
-
     date(2021, 1, 4): CollectionDate(date(2021, 1, 5), (RUBBISH,)),
     date(2021, 1, 5): CollectionDate(date(2021, 1, 6), (RUBBISH,)),
     date(2021, 1, 6): CollectionDate(date(2021, 1, 7), (RUBBISH,)),
@@ -97,7 +95,7 @@ def get_next_bin_collection(regular_collection_day, input_date=None):
             return collection
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     collections = create_collections()
     for c in collections:
         print(c)
