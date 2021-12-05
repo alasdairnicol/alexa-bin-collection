@@ -44,21 +44,16 @@ class CollectionDate:
 
 
 EXCEPTIONS = {
-    # date(2020, 12, 21): CollectionDate(date(2020, 12, 21), (RUBBISH,)),  # Regular day
-    # date(2020, 12, 22): CollectionDate(date(2020, 12, 22), (RUBBISH,)),  # Regular day
-    # date(2020, 12, 23): CollectionDate(date(2020, 12, 23), (RUBBISH,)),  # Regular day
-    # date(2020, 12, 24): CollectionDate(date(2020, 12, 24), (RUBBISH,)),  # Regular day
-    date(2020, 12, 25): CollectionDate(date(2020, 12, 28), (RUBBISH,)),
-    date(2020, 12, 28): CollectionDate(date(2020, 12, 29), (RECYCLING,)),
-    date(2020, 12, 29): CollectionDate(date(2020, 12, 30), (RECYCLING,)),
-    date(2020, 12, 30): CollectionDate(date(2020, 12, 31), (RECYCLING,)),
-    date(2020, 12, 31): CollectionDate(date(2021, 1, 2), (RECYCLING,)),
-    date(2021, 1, 1): CollectionDate(date(2021, 1, 4), (RECYCLING,)),
-    date(2021, 1, 4): CollectionDate(date(2021, 1, 5), (RUBBISH,)),
-    date(2021, 1, 5): CollectionDate(date(2021, 1, 6), (RUBBISH,)),
-    date(2021, 1, 6): CollectionDate(date(2021, 1, 7), (RUBBISH,)),
-    date(2021, 1, 7): CollectionDate(date(2021, 1, 8), (RUBBISH,)),
-    date(2021, 1, 8): CollectionDate(date(2021, 1, 9), (RUBBISH,)),
+    date(2021, 12, 27): CollectionDate(date(2021, 12, 28), (RECYCLING,)),
+    date(2021, 12, 28): CollectionDate(date(2021, 12, 29), (RECYCLING,)),
+    date(2021, 12, 29): CollectionDate(date(2021, 12, 30), (RECYCLING,)),
+    date(2021, 12, 30): CollectionDate(date(2021, 12, 31), (RECYCLING,)),
+    date(2021, 12, 31): CollectionDate(date(2022, 1, 3), (RECYCLING,)),
+    date(2022, 1, 3): CollectionDate(date(2022, 1, 4), (RUBBISH,)),
+    date(2022, 1, 4): CollectionDate(date(2022, 1, 5), (RUBBISH,)),
+    date(2022, 1, 5): CollectionDate(date(2022, 1, 6), (RUBBISH,)),
+    date(2022, 1, 6): CollectionDate(date(2022, 1, 7), (RUBBISH,)),
+    date(2022, 1, 7): CollectionDate(date(2022, 1, 8), (RUBBISH,)),
 }
 
 
@@ -69,7 +64,7 @@ def create_collections(regular_collection_day):
 
     collected = (RUBBISH,)
     not_collected = (RECYCLING, GARDEN)
-    while input_date < date(2021, 12, 1):
+    while input_date < date(2022, 12, 1):
         if input_date in EXCEPTIONS:
             collection = EXCEPTIONS[input_date]
         else:
