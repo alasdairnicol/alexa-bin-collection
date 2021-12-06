@@ -62,7 +62,7 @@ def create_collections(regular_collection_day):
     input_date = date(2021, 10, 31)  # Last Sunday of October 2021
     input_date += timedelta(WEEKDAYS[regular_collection_day])
 
-    collected = (RECYCLING, GARDEN)
+    collected = (RECYCLING,)
     not_collected = (RUBBISH,)
     while input_date < date(2022, 12, 11):
         if input_date in EXCEPTIONS:
