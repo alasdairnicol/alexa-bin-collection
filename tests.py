@@ -11,29 +11,15 @@ def test_default_input_date():
     collection = get_next_bin_collection("FRIDAY")
     assert isinstance(collection, CollectionDate)
 
-    with freeze_time("2022-01-11"):
+    with freeze_time("2023-01-11"):
         collection = get_next_bin_collection("FRIDAY")
-        assert collection.date == date(2022, 1, 14)
+        assert collection.date == date(2023, 1, 13)
         assert collection.types == (RECYCLING,)
 
 
 @pytest.mark.parametrize(
     "regular_collection_day,input_date,collection_date,collection_types",
     [
-        ["MONDAY", date(2021, 11, 1), date(2021, 11, 1), (RECYCLING,)],
-        ["MONDAY", date(2021, 11, 2), date(2021, 11, 8), (RUBBISH,)],
-        ["MONDAY", date(2021, 11, 3), date(2021, 11, 8), (RUBBISH,)],
-        ["MONDAY", date(2021, 11, 7), date(2021, 11, 8), (RUBBISH,)],
-        ["MONDAY", date(2021, 11, 8), date(2021, 11, 8), (RUBBISH,)],
-        ["MONDAY", date(2021, 11, 9), date(2021, 11, 15), (RECYCLING,)],
-        ["FRIDAY", date(2021, 11, 1), date(2021, 11, 5), (RECYCLING,)],
-        ["FRIDAY", date(2021, 11, 4), date(2021, 11, 5), (RECYCLING,)],
-        ["FRIDAY", date(2021, 11, 5), date(2021, 11, 5), (RECYCLING,)],
-        ["FRIDAY", date(2021, 11, 6), date(2021, 11, 12), (RUBBISH,)],
-        ["FRIDAY", date(2021, 11, 11), date(2021, 11, 12), (RUBBISH,)],
-        ["FRIDAY", date(2021, 11, 12), date(2021, 11, 12), (RUBBISH,)],
-        ["FRIDAY", date(2021, 11, 13), date(2021, 11, 19), (RECYCLING,)],
-        ["MONDAY", date(2022, 10, 30), date(2022, 10, 31), (RECYCLING,)],
         ["MONDAY", date(2022, 10, 31), date(2022, 10, 31), (RECYCLING,)],
         ["MONDAY", date(2022, 11, 1), date(2022, 11, 7), (RUBBISH,)],
         ["MONDAY", date(2022, 11, 6), date(2022, 11, 7), (RUBBISH,)],
@@ -51,59 +37,6 @@ def test_default_input_date():
     ],
 )
 def test_get_next_bin_collection(
-    regular_collection_day, input_date, collection_date, collection_types
-):
-    collection = get_next_bin_collection(regular_collection_day, input_date)
-    assert collection.date == collection_date
-    assert collection.types == collection_types
-
-
-@pytest.mark.parametrize(
-    "regular_collection_day,input_date,collection_date,collection_types",
-    [
-        ["MONDAY", date(2021, 12, 20), date(2021, 12, 20), (RUBBISH,)],
-        ["MONDAY", date(2021, 12, 21), date(2021, 12, 28), (RECYCLING,)],
-        ["MONDAY", date(2021, 12, 27), date(2021, 12, 28), (RECYCLING,)],
-        ["MONDAY", date(2021, 12, 28), date(2021, 12, 28), (RECYCLING,)],
-        ["MONDAY", date(2021, 12, 29), date(2022, 1, 4), (RUBBISH,)],
-        ["MONDAY", date(2022, 1, 3), date(2022, 1, 4), (RUBBISH,)],
-        ["MONDAY", date(2022, 1, 4), date(2022, 1, 4), (RUBBISH,)],
-        ["MONDAY", date(2022, 1, 5), date(2022, 1, 10), (RECYCLING,)],  # back to normal
-        ["TUESDAY", date(2021, 12, 21), date(2021, 12, 21), (RUBBISH,)],
-        ["TUESDAY", date(2021, 12, 22), date(2021, 12, 29), (RECYCLING,)],
-        ["TUESDAY", date(2021, 12, 28), date(2021, 12, 29), (RECYCLING,)],
-        ["TUESDAY", date(2021, 12, 29), date(2021, 12, 29), (RECYCLING,)],
-        ["TUESDAY", date(2021, 12, 30), date(2022, 1, 5), (RUBBISH,)],
-        ["TUESDAY", date(2022, 1, 4), date(2022, 1, 5), (RUBBISH,)],
-        ["TUESDAY", date(2022, 1, 5), date(2022, 1, 5), (RUBBISH,)],
-        ["TUESDAY", date(2022, 1, 6), date(2022, 1, 11), (RECYCLING,)],  # back to normal
-        ["WEDNESDAY", date(2021, 12, 22), date(2021, 12, 22), (RUBBISH,)],
-        ["WEDNESDAY", date(2021, 12, 23), date(2021, 12, 30), (RECYCLING,)],
-        ["WEDNESDAY", date(2021, 12, 29), date(2021, 12, 30), (RECYCLING,)],
-        ["WEDNESDAY", date(2021, 12, 30), date(2021, 12, 30), (RECYCLING,)],
-        ["WEDNESDAY", date(2021, 12, 31), date(2022, 1, 6), (RUBBISH,)],
-        ["WEDNESDAY", date(2022, 1, 5), date(2022, 1, 6), (RUBBISH,)],
-        ["WEDNESDAY", date(2022, 1, 6), date(2022, 1, 6), (RUBBISH,)],
-        ["WEDNESDAY", date(2022, 1, 7), date(2022, 1, 12), (RECYCLING,)],  # back to normal
-        ["THURSDAY", date(2021, 12, 23), date(2021, 12, 23), (RUBBISH,)],
-        ["THURSDAY", date(2021, 12, 24), date(2021, 12, 31), (RECYCLING,)],
-        ["THURSDAY", date(2021, 12, 30), date(2021, 12, 31), (RECYCLING,)],
-        ["THURSDAY", date(2021, 12, 31), date(2021, 12, 31), (RECYCLING,)],
-        ["THURSDAY", date(2022, 1, 1), date(2022, 1, 7), (RUBBISH,)],
-        ["THURSDAY", date(2022, 1, 6), date(2022, 1, 7), (RUBBISH,)],
-        ["THURSDAY", date(2022, 1, 7), date(2022, 1, 7), (RUBBISH,)],
-        ["THURSDAY", date(2022, 1, 8), date(2022, 1, 13), (RECYCLING,)],  # back to normal
-        ["FRIDAY", date(2021, 12, 24), date(2021, 12, 24), (RUBBISH,)],
-        ["FRIDAY", date(2021, 12, 25), date(2022, 1, 3), (RECYCLING,)],
-        ["FRIDAY", date(2022, 1, 2), date(2022, 1, 3), (RECYCLING,)],
-        ["FRIDAY", date(2022, 1, 3), date(2022, 1, 3), (RECYCLING,)],
-        ["FRIDAY", date(2022, 1, 4), date(2022, 1, 8), (RUBBISH,)],
-        ["FRIDAY", date(2022, 1, 7), date(2022, 1, 8), (RUBBISH,)],
-        ["FRIDAY", date(2022, 1, 8), date(2022, 1, 8), (RUBBISH,)],
-        ["FRIDAY", date(2022, 1, 9), date(2022, 1, 14), (RECYCLING,)],  # back to normal
-    ],
-)
-def test_christmas_2021(
     regular_collection_day, input_date, collection_date, collection_types
 ):
     collection = get_next_bin_collection(regular_collection_day, input_date)
@@ -158,11 +91,11 @@ def test_no_collection_data():
 
 
 def test_no_collection_data_too_early():
-    assert get_next_bin_collection("MONDAY", date(2020, 9, 27)) is None
-    assert get_next_bin_collection("MONDAY", date(2020, 9, 28)) is not None
+    assert get_next_bin_collection("MONDAY", date(2022, 10, 30)) is None
+    assert get_next_bin_collection("MONDAY", date(2022, 10, 31)) is not None
 
-    assert get_next_bin_collection("FRIDAY", date(2020, 9, 27)) is None
-    assert get_next_bin_collection("FRIDAY", date(2020, 9, 28)) is not None
+    assert get_next_bin_collection("FRIDAY", date(2022, 10, 30)) is None
+    assert get_next_bin_collection("FRIDAY", date(2022, 10, 31)) is not None
 
 
 def test_friendly_date():

@@ -17,6 +17,9 @@ WEEKDAYS = {
     "SUNDAY": 7,
 }
 
+# calculate collection dates from after this date
+LAST_SUNDAY_OF_2022 = date(2022, 10, 30)
+
 
 class CollectionDate:
     def __init__(self, collection_date, collection_types):
@@ -65,7 +68,7 @@ EXCEPTIONS = {
 
 def create_collections(regular_collection_day):
     collections = []
-    input_date = date(2021, 10, 31)  # Last Sunday of October 2021
+    input_date = LAST_SUNDAY_OF_2022  # Last Sunday of October 2022
     input_date += timedelta(WEEKDAYS[regular_collection_day])
 
     collected = (RECYCLING,)
@@ -86,7 +89,8 @@ def get_next_bin_collection(regular_collection_day, input_date=None):
     if input_date is None:
         input_date = date.today()
 
-    if input_date <= date(2020, 9, 27):  # last Sunday in September 2019
+    if input_date <= LAST_SUNDAY_OF_2022:
+        # input date is too early
         return None
 
     collections = create_collections(regular_collection_day)
