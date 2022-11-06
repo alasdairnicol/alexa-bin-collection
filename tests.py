@@ -99,46 +99,31 @@ def test_christmas_2021(
 @pytest.mark.parametrize(
     "regular_collection_day,input_date,collection_date,collection_types",
     [
-        ["MONDAY", date(2022, 12, 19), date(2021, 12, 19), (RUBBISH,)],
-        ["MONDAY", date(2022, 12, 20), date(2021, 12, 27), (RECYCLING,)],
-        ["MONDAY", date(2022, 12, 26), date(2021, 12, 27), (RECYCLING,)],
-        ["MONDAY", date(2022, 12, 27), date(2021, 12, 27), (RECYCLING,)],
-        ["MONDAY", date(2022, 12, 28), date(2022, 1, 2), (RUBBISH,)],
-        ["MONDAY", date(2022, 1, 3), date(2022, 1, 4), (RUBBISH,)],
-        ["MONDAY", date(2022, 1, 4), date(2022, 1, 4), (RUBBISH,)],
-        ["MONDAY", date(2022, 1, 5), date(2022, 1, 10), (RECYCLING,)],  # back to normal
-        ["TUESDAY", date(2021, 12, 21), date(2021, 12, 21), (RUBBISH,)],
-        ["TUESDAY", date(2021, 12, 22), date(2021, 12, 29), (RECYCLING,)],
-        ["TUESDAY", date(2021, 12, 28), date(2021, 12, 29), (RECYCLING,)],
-        ["TUESDAY", date(2021, 12, 29), date(2021, 12, 29), (RECYCLING,)],
-        ["TUESDAY", date(2021, 12, 30), date(2022, 1, 5), (RUBBISH,)],
-        ["TUESDAY", date(2022, 1, 4), date(2022, 1, 5), (RUBBISH,)],
-        ["TUESDAY", date(2022, 1, 5), date(2022, 1, 5), (RUBBISH,)],
-        ["TUESDAY", date(2022, 1, 6), date(2022, 1, 11), (RECYCLING,)],  # back to normal
-        ["WEDNESDAY", date(2021, 12, 22), date(2021, 12, 22), (RUBBISH,)],
-        ["WEDNESDAY", date(2021, 12, 23), date(2021, 12, 30), (RECYCLING,)],
-        ["WEDNESDAY", date(2021, 12, 29), date(2021, 12, 30), (RECYCLING,)],
-        ["WEDNESDAY", date(2021, 12, 30), date(2021, 12, 30), (RECYCLING,)],
-        ["WEDNESDAY", date(2021, 12, 31), date(2022, 1, 6), (RUBBISH,)],
-        ["WEDNESDAY", date(2022, 1, 5), date(2022, 1, 6), (RUBBISH,)],
-        ["WEDNESDAY", date(2022, 1, 6), date(2022, 1, 6), (RUBBISH,)],
-        ["WEDNESDAY", date(2022, 1, 7), date(2022, 1, 12), (RECYCLING,)],  # back to normal
-        ["THURSDAY", date(2021, 12, 23), date(2021, 12, 23), (RUBBISH,)],
-        ["THURSDAY", date(2021, 12, 24), date(2021, 12, 31), (RECYCLING,)],
-        ["THURSDAY", date(2021, 12, 30), date(2021, 12, 31), (RECYCLING,)],
-        ["THURSDAY", date(2021, 12, 31), date(2021, 12, 31), (RECYCLING,)],
-        ["THURSDAY", date(2022, 1, 1), date(2022, 1, 7), (RUBBISH,)],
-        ["THURSDAY", date(2022, 1, 6), date(2022, 1, 7), (RUBBISH,)],
-        ["THURSDAY", date(2022, 1, 7), date(2022, 1, 7), (RUBBISH,)],
-        ["THURSDAY", date(2022, 1, 8), date(2022, 1, 13), (RECYCLING,)],  # back to normal
-        ["FRIDAY", date(2021, 12, 24), date(2021, 12, 24), (RUBBISH,)],
-        ["FRIDAY", date(2021, 12, 25), date(2022, 1, 3), (RECYCLING,)],
-        ["FRIDAY", date(2022, 1, 2), date(2022, 1, 3), (RECYCLING,)],
-        ["FRIDAY", date(2022, 1, 3), date(2022, 1, 3), (RECYCLING,)],
-        ["FRIDAY", date(2022, 1, 4), date(2022, 1, 8), (RUBBISH,)],
-        ["FRIDAY", date(2022, 1, 7), date(2022, 1, 8), (RUBBISH,)],
-        ["FRIDAY", date(2022, 1, 8), date(2022, 1, 8), (RUBBISH,)],
-        ["FRIDAY", date(2022, 1, 9), date(2022, 1, 14), (RECYCLING,)],  # back to normal
+        ["MONDAY", date(2022, 12, 19), date(2022, 12, 19), (RUBBISH,)],
+        ["MONDAY", date(2022, 12, 20), date(2022, 12, 27), (RECYCLING,)],
+        ["MONDAY", date(2022, 12, 26), date(2022, 12, 27), (RECYCLING,)],
+        ["MONDAY", date(2022, 12, 27), date(2022, 12, 27), (RECYCLING,)],
+        ["MONDAY", date(2022, 12, 28), date(2023, 1, 2), (RUBBISH,)],  # back to normal
+        ["TUESDAY", date(2022, 12, 20), date(2022, 12, 20), (RUBBISH,)],
+        ["TUESDAY", date(2022, 12, 21), date(2022, 12, 28), (RECYCLING,)],
+        ["TUESDAY", date(2022, 12, 27), date(2022, 12, 28), (RECYCLING,)],
+        ["TUESDAY", date(2022, 12, 28), date(2022, 12, 28), (RECYCLING,)],
+        ["TUESDAY", date(2022, 12, 29), date(2023, 1, 3), (RUBBISH,)],  # back to normal
+        ["WEDNESDAY", date(2022, 12, 21), date(2022, 12, 21), (RUBBISH,)],
+        ["WEDNESDAY", date(2022, 12, 22), date(2022, 12, 29), (RECYCLING,)],
+        ["WEDNESDAY", date(2022, 12, 28), date(2022, 12, 29), (RECYCLING,)],
+        ["WEDNESDAY", date(2022, 12, 29), date(2022, 12, 29), (RECYCLING,)],
+        ["WEDNESDAY", date(2022, 12, 30), date(2023, 1, 4), (RUBBISH,)],  # back to normal
+        ["THURSDAY", date(2022, 12, 22), date(2022, 12, 22), (RUBBISH,)],
+        ["THURSDAY", date(2022, 12, 23), date(2022, 12, 30), (RECYCLING,)],
+        ["THURSDAY", date(2022, 12, 24), date(2022, 12, 30), (RECYCLING,)],
+        ["THURSDAY", date(2022, 12, 30), date(2022, 12, 30), (RECYCLING,)],
+        ["THURSDAY", date(2022, 12, 31), date(2023, 1, 5), (RUBBISH,)],  # back to normal
+        ["FRIDAY", date(2022, 12, 23), date(2022, 12, 23), (RUBBISH,)],
+        ["FRIDAY", date(2022, 12, 24), date(2022, 12, 31), (RECYCLING,)],
+        ["FRIDAY", date(2022, 12, 30), date(2022, 12, 31), (RECYCLING,)],
+        ["FRIDAY", date(2022, 12, 31), date(2022, 12, 31), (RECYCLING,)],
+        ["FRIDAY", date(2023, 1, 1), date(2023, 1, 6), (RUBBISH,)],  # back to normal
     ],
 )
 def test_christmas_2022(
