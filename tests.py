@@ -135,11 +135,11 @@ def test_christmas_2022(
 
 
 def test_no_collection_data():
-    assert get_next_bin_collection("MONDAY", date(2022, 12, 5)) is not None
-    assert get_next_bin_collection("MONDAY", date(2022, 12, 6)) is None
+    assert get_next_bin_collection("MONDAY", date(2023, 12, 4)) is not None
+    assert get_next_bin_collection("MONDAY", date(2023, 12, 5)) is None
 
-    assert get_next_bin_collection("FRIDAY", date(2022, 12, 9)) is not None
-    assert get_next_bin_collection("FRIDAY", date(2022, 12, 10)) is None
+    assert get_next_bin_collection("FRIDAY", date(2023, 12, 8)) is not None
+    assert get_next_bin_collection("FRIDAY", date(2023, 12, 9)) is None
 
 
 def test_no_collection_data_too_early():
