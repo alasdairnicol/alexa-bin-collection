@@ -32,8 +32,6 @@ def test_default_input_date():
         ["FRIDAY", date(2022, 11, 10), date(2022, 11, 11), (RUBBISH,)],
         ["FRIDAY", date(2022, 11, 11), date(2022, 11, 11), (RUBBISH,)],
         ["FRIDAY", date(2022, 11, 12), date(2022, 11, 18), (RECYCLING,)],
-
-
     ],
 )
 def test_get_next_bin_collection(
@@ -61,12 +59,22 @@ def test_get_next_bin_collection(
         ["WEDNESDAY", date(2022, 12, 22), date(2022, 12, 29), (RECYCLING,)],
         ["WEDNESDAY", date(2022, 12, 28), date(2022, 12, 29), (RECYCLING,)],
         ["WEDNESDAY", date(2022, 12, 29), date(2022, 12, 29), (RECYCLING,)],
-        ["WEDNESDAY", date(2022, 12, 30), date(2023, 1, 4), (RUBBISH,)],  # back to normal
+        [
+            "WEDNESDAY",
+            date(2022, 12, 30),
+            date(2023, 1, 4),
+            (RUBBISH,),
+        ],  # back to normal
         ["THURSDAY", date(2022, 12, 22), date(2022, 12, 22), (RUBBISH,)],
         ["THURSDAY", date(2022, 12, 23), date(2022, 12, 30), (RECYCLING,)],
         ["THURSDAY", date(2022, 12, 24), date(2022, 12, 30), (RECYCLING,)],
         ["THURSDAY", date(2022, 12, 30), date(2022, 12, 30), (RECYCLING,)],
-        ["THURSDAY", date(2022, 12, 31), date(2023, 1, 5), (RUBBISH,)],  # back to normal
+        [
+            "THURSDAY",
+            date(2022, 12, 31),
+            date(2023, 1, 5),
+            (RUBBISH,),
+        ],  # back to normal
         ["FRIDAY", date(2022, 12, 23), date(2022, 12, 23), (RUBBISH,)],
         ["FRIDAY", date(2022, 12, 24), date(2022, 12, 31), (RECYCLING,)],
         ["FRIDAY", date(2022, 12, 30), date(2022, 12, 31), (RECYCLING,)],
