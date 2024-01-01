@@ -46,11 +46,6 @@ class CollectionDate:
 
 
 EXCEPTIONS = {
-    date(2022, 12, 26): CollectionDate(date(2022, 12, 27), (RECYCLING,)),
-    date(2022, 12, 27): CollectionDate(date(2022, 12, 28), (RECYCLING,)),
-    date(2022, 12, 28): CollectionDate(date(2022, 12, 29), (RECYCLING,)),
-    date(2022, 12, 29): CollectionDate(date(2022, 12, 30), (RECYCLING,)),
-    date(2022, 12, 30): CollectionDate(date(2022, 12, 31), (RECYCLING,)),
     date(2023, 12, 25): CollectionDate(date(2023, 12, 27), (RECYCLING,)),
     date(2023, 12, 26): CollectionDate(date(2023, 12, 28), (RECYCLING,)),
     date(2023, 12, 27): CollectionDate(date(2023, 12, 29), (RECYCLING,)),
