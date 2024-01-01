@@ -62,7 +62,7 @@ EXCEPTIONS = {
 
 def create_collections(regular_collection_day):
     collections = []
-    input_date = LAST_SUNDAY_OF_2022  # Last Sunday of October 2022
+    input_date = LAST_SUNDAY_OF_OCTOBER_2023  # Last Sunday of October 2023
     input_date += timedelta(WEEKDAYS[regular_collection_day])
 
     collected = (RECYCLING,)

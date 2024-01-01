@@ -32,18 +32,6 @@ def test_default_input_date():
         ["FRIDAY", date(2023, 11, 9), date(2023, 11, 10), (RUBBISH,)],
         ["FRIDAY", date(2023, 11, 10), date(2023, 11, 10), (RUBBISH,)],
         ["FRIDAY", date(2023, 11, 11), date(2023, 11, 17), (RECYCLING,)],
-        ["MONDAY", date(2022, 10, 31), date(2022, 10, 31), (RECYCLING,)],
-        ["MONDAY", date(2022, 11, 1), date(2022, 11, 7), (RUBBISH,)],
-        ["MONDAY", date(2022, 11, 6), date(2022, 11, 7), (RUBBISH,)],
-        ["MONDAY", date(2022, 11, 7), date(2022, 11, 7), (RUBBISH,)],
-        ["MONDAY", date(2022, 11, 8), date(2022, 11, 14), (RECYCLING,)],
-        ["FRIDAY", date(2022, 11, 1), date(2022, 11, 4), (RECYCLING,)],
-        ["FRIDAY", date(2022, 11, 3), date(2022, 11, 4), (RECYCLING,)],
-        ["FRIDAY", date(2022, 11, 4), date(2022, 11, 4), (RECYCLING,)],
-        ["FRIDAY", date(2022, 11, 5), date(2022, 11, 11), (RUBBISH,)],
-        ["FRIDAY", date(2022, 11, 10), date(2022, 11, 11), (RUBBISH,)],
-        ["FRIDAY", date(2022, 11, 11), date(2022, 11, 11), (RUBBISH,)],
-        ["FRIDAY", date(2022, 11, 12), date(2022, 11, 18), (RECYCLING,)],
     ],
 )
 def test_get_next_bin_collection(
