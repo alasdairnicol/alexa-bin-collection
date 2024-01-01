@@ -11,15 +11,27 @@ def test_default_input_date():
     collection = get_next_bin_collection("FRIDAY")
     assert isinstance(collection, CollectionDate)
 
-    with freeze_time("2023-01-11"):
+    with freeze_time("2024-01-11"):
         collection = get_next_bin_collection("FRIDAY")
-        assert collection.date == date(2023, 1, 13)
+        assert collection.date == date(2024, 1, 12)
         assert collection.types == (RECYCLING,)
 
 
 @pytest.mark.parametrize(
     "regular_collection_day,input_date,collection_date,collection_types",
     [
+        ["MONDAY", date(2023, 10, 30), date(2023, 10, 30), (RECYCLING,)],
+        ["MONDAY", date(2023, 10, 31), date(2023, 11, 6), (RUBBISH,)],
+        ["MONDAY", date(2023, 11, 5), date(2023, 11, 6), (RUBBISH,)],
+        ["MONDAY", date(2023, 11, 6), date(2023, 11, 6), (RUBBISH,)],
+        ["MONDAY", date(2023, 11, 7), date(2023, 11, 13), (RECYCLING,)],
+        ["FRIDAY", date(2023, 10, 30), date(2023, 11, 3), (RECYCLING,)],
+        ["FRIDAY", date(2023, 11, 2), date(2023, 11, 3), (RECYCLING,)],
+        ["FRIDAY", date(2023, 11, 3), date(2023, 11, 3), (RECYCLING,)],
+        ["FRIDAY", date(2023, 11, 4), date(2023, 11, 10), (RUBBISH,)],
+        ["FRIDAY", date(2023, 11, 9), date(2023, 11, 10), (RUBBISH,)],
+        ["FRIDAY", date(2023, 11, 10), date(2023, 11, 10), (RUBBISH,)],
+        ["FRIDAY", date(2023, 11, 11), date(2023, 11, 17), (RECYCLING,)],
         ["MONDAY", date(2022, 10, 31), date(2022, 10, 31), (RECYCLING,)],
         ["MONDAY", date(2022, 11, 1), date(2022, 11, 7), (RUBBISH,)],
         ["MONDAY", date(2022, 11, 6), date(2022, 11, 7), (RUBBISH,)],

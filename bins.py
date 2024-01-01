@@ -18,6 +18,7 @@ WEEKDAYS = {
 
 # calculate collection dates from after this date
 LAST_SUNDAY_OF_2022 = date(2022, 10, 30)
+LAST_SUNDAY_OF_OCTOBER_2023 = date(2023, 10, 29)
 
 
 class CollectionDate:
