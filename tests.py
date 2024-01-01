@@ -90,12 +90,84 @@ def test_christmas_2022(
     assert collection.types == collection_types
 
 
-def test_no_collection_data():
-    assert get_next_bin_collection("MONDAY", date(2023, 12, 4)) is not None
-    assert get_next_bin_collection("MONDAY", date(2023, 12, 5)) is None
+@pytest.mark.parametrize(
+    "regular_collection_day,input_date,collection_date,collection_types",
+    [
+        ["MONDAY", date(2023, 12, 17), date(2023, 12, 18), (RUBBISH,)],
+        ["MONDAY", date(2023, 12, 18), date(2023, 12, 18), (RUBBISH,)],
+        ["MONDAY", date(2023, 12, 19), date(2023, 12, 27), (RECYCLING,)],
+        ["MONDAY", date(2023, 12, 26), date(2023, 12, 27), (RECYCLING,)],
+        ["MONDAY", date(2023, 12, 27), date(2023, 12, 27), (RECYCLING,)],
+        ["MONDAY", date(2023, 12, 28), date(2024, 1, 2), (RUBBISH,)],
+        ["MONDAY", date(2024, 1, 1), date(2024, 1, 2), (RUBBISH,)],
+        ["MONDAY", date(2024, 1, 2), date(2024, 1, 2), (RUBBISH,)],
+        ["MONDAY", date(2024, 1, 3), date(2024, 1, 8), (RECYCLING,)],  # back to normal
+        ["TUESDAY", date(2023, 12, 18), date(2023, 12, 19), (RUBBISH,)],
+        ["TUESDAY", date(2023, 12, 19), date(2023, 12, 19), (RUBBISH,)],
+        ["TUESDAY", date(2023, 12, 20), date(2023, 12, 28), (RECYCLING,)],
+        ["TUESDAY", date(2023, 12, 26), date(2023, 12, 28), (RECYCLING,)],
+        ["TUESDAY", date(2023, 12, 27), date(2023, 12, 28), (RECYCLING,)],
+        ["TUESDAY", date(2023, 12, 28), date(2023, 12, 28), (RECYCLING,)],
+        ["TUESDAY", date(2023, 12, 29), date(2024, 1, 3), (RUBBISH,)],
+        ["TUESDAY", date(2024, 1, 2), date(2024, 1, 3), (RUBBISH,)],
+        ["TUESDAY", date(2024, 1, 3), date(2024, 1, 3), (RUBBISH,)],
+        ["TUESDAY", date(2024, 1, 4), date(2024, 1, 9), (RECYCLING,)],  # back to normal
+        ["WEDNESDAY", date(2023, 12, 19), date(2023, 12, 20), (RUBBISH,)],
+        ["WEDNESDAY", date(2023, 12, 20), date(2023, 12, 20), (RUBBISH,)],
+        ["WEDNESDAY", date(2023, 12, 21), date(2023, 12, 29), (RECYCLING,)],
+        ["WEDNESDAY", date(2023, 12, 27), date(2023, 12, 29), (RECYCLING,)],
+        ["WEDNESDAY", date(2023, 12, 28), date(2023, 12, 29), (RECYCLING,)],
+        ["WEDNESDAY", date(2023, 12, 29), date(2023, 12, 29), (RECYCLING,)],
+        ["WEDNESDAY", date(2023, 12, 30), date(2024, 1, 4), (RUBBISH,)],
+        ["WEDNESDAY", date(2024, 1, 3), date(2024, 1, 4), (RUBBISH,)],
+        ["WEDNESDAY", date(2024, 1, 4), date(2024, 1, 4), (RUBBISH,)],
+        [
+            "WEDNESDAY",
+            date(2024, 1, 5),
+            date(2024, 1, 10),
+            (RECYCLING,),
+        ],  # back to normal
+        ["THURSDAY", date(2023, 12, 20), date(2023, 12, 21), (RUBBISH,)],
+        ["THURSDAY", date(2023, 12, 21), date(2023, 12, 21), (RUBBISH,)],
+        ["THURSDAY", date(2023, 12, 22), date(2023, 12, 30), (RECYCLING,)],
+        ["THURSDAY", date(2023, 12, 28), date(2023, 12, 30), (RECYCLING,)],
+        ["THURSDAY", date(2023, 12, 29), date(2023, 12, 30), (RECYCLING,)],
+        ["THURSDAY", date(2023, 12, 30), date(2023, 12, 30), (RECYCLING,)],
+        ["THURSDAY", date(2023, 12, 31), date(2024, 1, 5), (RUBBISH,)],
+        ["THURSDAY", date(2024, 1, 4), date(2024, 1, 5), (RUBBISH,)],
+        ["THURSDAY", date(2024, 1, 5), date(2024, 1, 5), (RUBBISH,)],
+        [
+            "THURSDAY",
+            date(2024, 1, 6),
+            date(2024, 1, 11),
+            (RECYCLING,),
+        ],  # back to normal
+        ["FRIDAY", date(2023, 12, 21), date(2023, 12, 22), (RUBBISH,)],
+        ["FRIDAY", date(2023, 12, 22), date(2023, 12, 22), (RUBBISH,)],
+        ["FRIDAY", date(2023, 12, 23), date(2023, 12, 31), (RECYCLING,)],
+        ["FRIDAY", date(2023, 12, 29), date(2023, 12, 31), (RECYCLING,)],
+        ["FRIDAY", date(2023, 12, 30), date(2023, 12, 31), (RECYCLING,)],
+        ["FRIDAY", date(2023, 12, 31), date(2023, 12, 31), (RECYCLING,)],
+        ["FRIDAY", date(2024, 1, 1), date(2024, 1, 6), (RUBBISH,)],
+        ["FRIDAY", date(2024, 1, 5), date(2024, 1, 6), (RUBBISH,)],
+        ["FRIDAY", date(2024, 1, 6), date(2024, 1, 6), (RUBBISH,)],
+        ["FRIDAY", date(2024, 1, 7), date(2024, 1, 12), (RECYCLING,)],  # back to normal
+    ],
+)
+def test_christmas_2023(
+    regular_collection_day, input_date, collection_date, collection_types
+):
+    collection = get_next_bin_collection(regular_collection_day, input_date)
+    assert collection.date == collection_date
+    assert collection.types == collection_types
 
-    assert get_next_bin_collection("FRIDAY", date(2023, 12, 8)) is not None
-    assert get_next_bin_collection("FRIDAY", date(2023, 12, 9)) is None
+
+def test_no_collection_data():
+    assert get_next_bin_collection("MONDAY", date(2024, 12, 2)) is not None
+    assert get_next_bin_collection("MONDAY", date(2024, 12, 3)) is None
+
+    assert get_next_bin_collection("FRIDAY", date(2024, 12, 6)) is not None
+    assert get_next_bin_collection("FRIDAY", date(2024, 12, 7)) is None
 
 
 def test_no_collection_data_too_early():

@@ -51,6 +51,16 @@ EXCEPTIONS = {
     date(2022, 12, 28): CollectionDate(date(2022, 12, 29), (RECYCLING,)),
     date(2022, 12, 29): CollectionDate(date(2022, 12, 30), (RECYCLING,)),
     date(2022, 12, 30): CollectionDate(date(2022, 12, 31), (RECYCLING,)),
+    date(2023, 12, 25): CollectionDate(date(2023, 12, 27), (RECYCLING,)),
+    date(2023, 12, 26): CollectionDate(date(2023, 12, 28), (RECYCLING,)),
+    date(2023, 12, 27): CollectionDate(date(2023, 12, 29), (RECYCLING,)),
+    date(2023, 12, 28): CollectionDate(date(2023, 12, 30), (RECYCLING,)),
+    date(2023, 12, 29): CollectionDate(date(2023, 12, 31), (RECYCLING,)),
+    date(2024, 1, 1): CollectionDate(date(2024, 1, 2), (RUBBISH,)),
+    date(2024, 1, 2): CollectionDate(date(2024, 1, 3), (RUBBISH,)),
+    date(2024, 1, 3): CollectionDate(date(2024, 1, 4), (RUBBISH,)),
+    date(2024, 1, 4): CollectionDate(date(2024, 1, 5), (RUBBISH,)),
+    date(2024, 1, 5): CollectionDate(date(2024, 1, 6), (RUBBISH,)),
 }
 
 
@@ -61,7 +71,7 @@ def create_collections(regular_collection_day):
 
     collected = (RECYCLING,)
     not_collected = (RUBBISH,)
-    while input_date < date(2023, 12, 10):
+    while input_date < date(2024, 12, 8):
         if input_date in EXCEPTIONS:
             collection = EXCEPTIONS[input_date]
         else:
